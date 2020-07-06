@@ -1819,6 +1819,7 @@ name = "my-little-roguelike-2"
 version = "0.1.0"
 dependencies = [
  "amethyst",
+ "random",
 ]
 
 [[package]]
@@ -2516,6 +2517,12 @@ checksum = "cbf7e9e623549b0e21f6e97cf8ecf247c1a8fd2e8a992ae265314300b2455d5c"
 dependencies = [
  "rand_core 0.3.1",
 ]
+
+[[package]]
+name = "random"
+version = "0.12.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97d13a3485349981c90c79112a11222c3e6e75de1d52b87a7525b3bf5361420f"
 
 [[package]]
 name = "raw-window-handle"

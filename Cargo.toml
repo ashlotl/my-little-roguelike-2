@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 amethyst="0.15.0"
-
+random="0.12.2"
 
 [features]
 default = ["vulkan"]

@@ -1,6 +1,63 @@
+//have children
+mod entities;
+mod systems;
+
+//lonely
+mod math_utils;
+mod resource_management;
+mod states;
+
+
 use amethyst::{
+	Application,
+	core::{
+		transform::{
+			TransformBundle,
+		},
+	},
+	GameDataBuilder,
+	input::{
+		InputBundle,
+		StringBindings,
+	},
+	renderer::{
+		plugins::{
+			RenderFlat2D,
+			RenderToWindow,
+		},
+		types::{
+			DefaultBackend,
+		},
+		RenderingBundle,
+	},
 	utils::{
 		application_root_dir,
+	},
+};
+
+use crate::{
+	states::{
+		GameplayState,
+	},
+	systems::{
+		echo_avatar::{
+			EchoAvatarSystem,
+		},
+		enemy::{
+			EnemySystem,
+		},
+		level_generator::{
+			LevelGeneratorSystem,
+		},
+		physics::{
+			PhysicsSystem,
+		},
+		player_input::{
+			PlayerInputSystem,
+		},
+		projectile::{
+			ProjectileSystem,
+		},
 	},
 };
 
@@ -17,7 +74,7 @@ fn main() -> amethyst::Result<()> {
 
 
 	let input_bundle = InputBundle::<StringBindings>::new()
-		.with_bindings_from_file(app_config_binding);
+		.with_bindings_from_file(app_config_binding)?;
 
 
 	let game_data = GameDataBuilder::default()
@@ -25,7 +82,7 @@ fn main() -> amethyst::Result<()> {
 			RenderingBundle::<DefaultBackend>::new()
 				.with_plugin(
 					RenderToWindow::from_config_path(app_config_display)?
-						.with_clear([0.0,0.0,0.0,1.0]),
+						.with_clear([0.0,0.0,0.5,1.0]),
 				)
 				.with_plugin(
 					RenderFlat2D::default(),
@@ -35,14 +92,15 @@ fn main() -> amethyst::Result<()> {
 		.with_bundle(input_bundle)?
 		.with(
 			PhysicsSystem {
-
+				scale:2.0,
 			},
 			"sys_physics",
 			&[],
 		)
 		.with(
 			PlayerInputSystem {
-				scale:1.0,
+				scale:120.0,
+				deadzone:0.05,
 			},
 			"sys_player_input",
 			&["sys_physics"],
@@ -70,7 +128,9 @@ fn main() -> amethyst::Result<()> {
 		)
 		.with(
 			LevelGeneratorSystem {
-				//ohboyohboyohboy
+				first:true,
+				seed_1:420,
+				seed_2:69,
 			},
 			"sys_level_generator",
 			&["sys_projectile"],

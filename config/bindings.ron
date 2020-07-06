@@ -1,0 +1,11 @@
+(
+	axes: {
+		"up": Emulated(pos: Key(W), neg: Key(S)),
+		"right": Emulated(pos: Key(D), neg: Key(A)),
+
+	},
+	actions: {
+		"grab": [[Key(Space)]],
+		"do a cartwheel by pressing either 4, 2, and 0 at the same time or by pressing y": [[Key(Key4),Key(Key2),Key(Key0)],[Key(Y)]],
+	}
+)

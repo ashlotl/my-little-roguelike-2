@@ -1,0 +1,4 @@
+(
+  title: "The Tale of ----",
+  dimensions: Some((1200, 600)),
+)
